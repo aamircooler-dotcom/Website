@@ -195,72 +195,70 @@ html {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translate3d(0, 30px, 0);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateY(0);
   }
 }
 
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translate3d(-30px, 0, 0);
+    transform: translateX(-60px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translate3d(30px, 0, 0);
+    transform: translateX(60px);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translateX(0);
   }
 }
 
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale3d(0.95, 0.95, 1);
+    transform: scale(0.8);
   }
   to {
     opacity: 1;
-    transform: scale3d(1, 1, 1);
+    transform: scale(1);
   }
 }
 
 /* Animation classes */
 .animate-on-scroll {
   opacity: 0;
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  perspective: 1000px;
+  transition: all 0.6s ease-out;
 }
 
 .animate-on-scroll.animate-fade-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
 .animate-on-scroll.animate-fade-left {
-  animation: fadeInLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInLeft 0.8s ease-out forwards;
 }
 
 .animate-on-scroll.animate-fade-right {
-  animation: fadeInRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: fadeInRight 0.8s ease-out forwards;
 }
 
 .animate-on-scroll.animate-scale-in {
-  animation: scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: scaleIn 0.8s ease-out forwards;
 }
 
-/* Optimized staggered animation delays */
+/* Staggered animation delays */
 .animate-delay-100 {
   animation-delay: 0.1s;
 }
@@ -273,42 +271,50 @@ html {
   animation-delay: 0.3s;
 }
 
-/* Performance optimizations */
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.animate-delay-400 {
+  animation-delay: 0.4s;
 }
 
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.animate-delay-500 {
+  animation-delay: 0.5s;
 }
 
-/* GPU acceleration for smooth animations */
-.floating-icon,
-.animate-on-scroll,
-video {
-  transform: translateZ(0);
-  will-change: transform;
-  backface-visibility: hidden;
+.animate-delay-600 {
+  animation-delay: 0.6s;
 }
 
-/* Optimize video performance */
-video {
-  object-fit: cover;
-  transform: translateZ(0);
-  will-change: auto;
+/* Parallax scroll effect */
+.parallax-slow {
+  transform: translateY(0);
+  transition: transform 0.1s linear;
 }
 
-video:not([autoplay]) {
-  will-change: auto;
+.parallax-medium {
+  transform: translateY(0);
+  transition: transform 0.1s linear;
+}
+
+.parallax-fast {
+  transform: translateY(0);
+  transition: transform 0.1s linear;
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 20, 25, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
 }
 /* Improve touch targets on mobile */
 @media (max-width: 768px) {
