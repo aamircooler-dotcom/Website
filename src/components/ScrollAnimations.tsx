@@ -21,11 +21,53 @@ const ScrollAnimation: React.FC<ScrollAnimationProps> = ({
     const element = elementRef.current;
     if (!element) return;
 
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      element.classList.add(`animate-${animation}`);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
+            // Use requestAnimationFrame for better performance
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                entry.target.classList.add(`animate-${animation}`);
+              }, delay);
+            });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold,
+        rootMargin: '20px 0px -20px 0px'
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [animation, delay, threshold]);
+
+  return (
+    <div
+      ref={elementRef}
+      className={`animate-on-scroll ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default ScrollAnimation;
               entry.target.classList.add(`animate-${animation}`);
             }, delay);
             observer.unobserve(entry.target);
