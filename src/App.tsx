@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, Home, Instagram, Mail } from 'lucide-react';
 import FloatingIcons from "./components/FloatingIcons";
 import LoadingScreen from "./components/LoadingScreen";
+import ScrollAnimation from "./components/ScrollAnimations";
+import ParallaxElement from "./components/ParallaxElement";
 
 interface VideoPlayerProps {
   src: string;
@@ -294,7 +296,7 @@ function App() {
       {/* Hero Section */}
    <section id="home" className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] text-white">
          {/* Sophisticated Small Grid Background */}
-        <div className="absolute inset-0">
+        <ParallaxElement speed="slow" className="absolute inset-0">
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -310,77 +312,87 @@ function App() {
             </defs>
            <rect width="100%" height="100%" fill="url(#smallGrid)" filter="url(#gridGlow)" opacity="0.5" />
           </svg>
-        </div>
+        </ParallaxElement>
       <FloatingIcons />
         {/* Deep Blue Blur Orbs */}
-        <div className="absolute top-1/4 left-[85%] w-80 h-80 bg-[#1e40af]/40 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-[85%] w-96 h-96 bg-[#1e3a8a]/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-[#3730a3]/25 rounded-full blur-3xl"></div>
+        <ParallaxElement speed="medium">
+          <div className="absolute top-1/4 left-[85%] w-80 h-80 bg-[#1e40af]/40 rounded-full blur-3xl"></div>
+        </ParallaxElement>
+        <ParallaxElement speed="fast">
+          <div className="absolute bottom-1/4 right-[85%] w-96 h-96 bg-[#1e3a8a]/30 rounded-full blur-3xl"></div>
+        </ParallaxElement>
+        <ParallaxElement speed="medium">
+          <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-[#3730a3]/25 rounded-full blur-3xl"></div>
+        </ParallaxElement>
         
         <div className="container mx-auto px-8 py-20">
           <div className="relative z-10">
             {/* Hero Content */}
-            <div className="text-center mb-8 md:mb-15">
-              <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-glow-purple">
-                Aamir Naqvi
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto px-4 text-glow-gray">
-                Crafting compelling visual stories through the art of editing
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mb-8 md:mb-16 px-4">
-                <button 
-                  onClick={() => {
-                    const element = document.getElementById('videos');
-                    if (element) {
-                      element.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start',
-                        inline: 'nearest'
-                      });
-                    }
-                  }}
-                  className="btn-enhanced btn-primary-enhanced rounded-lg w-full sm:w-auto text-glow-white"
-                >
-                  View Work
-                </button>
-                <button 
-                  onClick={() => {
-                    const element = document.getElementById('contact');
-                    if (element) {
-                      element.scrollIntoView({ 
-                        behavior: 'smooth',
-                        block: 'start',
-                        inline: 'nearest'
-                      });
-                    }
-                  }}
-                  className="btn-enhanced btn-secondary-enhanced rounded-lg w-full sm:w-auto text-glow-white"
-                >
-                  Contact Me
-                </button>
+            <ScrollAnimation animation="fade-up" delay={200}>
+              <div className="text-center mb-8 md:mb-15">
+                <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent text-glow-purple">
+                  Aamir Naqvi
+                </h1>
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 md:mb-8 max-w-2xl mx-auto px-4 text-glow-gray">
+                  Crafting compelling visual stories through the art of editing
+                </p>
+                <div className="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4 mb-8 md:mb-16 px-4">
+                  <button 
+                    onClick={() => {
+                      const element = document.getElementById('videos');
+                      if (element) {
+                        element.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start',
+                          inline: 'nearest'
+                        });
+                      }
+                    }}
+                    className="btn-enhanced btn-primary-enhanced rounded-lg w-full sm:w-auto text-glow-white"
+                  >
+                    View Work
+                  </button>
+                  <button 
+                    onClick={() => {
+                      const element = document.getElementById('contact');
+                      if (element) {
+                        element.scrollIntoView({ 
+                          behavior: 'smooth',
+                          block: 'start',
+                          inline: 'nearest'
+                        });
+                      }
+                    }}
+                    className="btn-enhanced btn-secondary-enhanced rounded-lg w-full sm:w-auto text-glow-white"
+                  >
+                    Contact Me
+                  </button>
+                </div>
               </div>
-            </div>
+            </ScrollAnimation>
             
             {/* Showreel */}
-            <div className="max-w-6xl mx-auto">
-              <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-white px-10 text-glow-purple">Showreel</h2>
-                <VideoPlayer
-                  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  poster="https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                  title="Showreel"
-                  aspectRatio="16:9"
-                />
+            <ScrollAnimation animation="scale-in" delay={400}>
+              <div className="max-w-6xl mx-auto">
+                <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-white px-10 text-glow-purple">Showreel</h2>
+                  <VideoPlayer
+                    src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    poster="https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                    title="Showreel"
+                    aspectRatio="16:9"
+                  />
+                </div>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </div>
       </section>
 
       {/* 16:9 Portfolio Section */}
-      <section id="videos" className="py-12 md:py-20 px-4 md:px-8 relative overflow-hidden bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] slide-up"> 
+      <section id="videos" className="py-12 md:py-20 px-4 md:px-8 relative overflow-hidden bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e]"> 
         {/* Small Grid Background */}
-        <div className="absolute inset-0">
+        <ParallaxElement speed="slow" className="absolute inset-0">
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="portfolioGrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -396,41 +408,52 @@ function App() {
             </defs>
             <rect width="100%" height="100%" fill="url(#portfolioGrid)" filter="url(#portfolioGlow)"/>
           </svg>
-        </div>
+        </ParallaxElement>
         
         {/* Deep Blue Blur Orbs */}
-        <div className="absolute top-1/4 left-[85%] w-64 h-64 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-[85%] w-64 h-64 bg-[#1e3a8a]/25 rounded-full blur-3xl"></div>
+        <ParallaxElement speed="medium">
+          <div className="absolute top-1/4 left-[85%] w-64 h-64 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
+        </ParallaxElement>
+        <ParallaxElement speed="fast">
+          <div className="absolute bottom-1/4 right-[85%] w-64 h-64 bg-[#1e3a8a]/25 rounded-full blur-3xl"></div>
+        </ParallaxElement>
         
         <div className="max-w-6xl mx-auto">
-          <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20 slide-up-delay-1">
-            <div className="text-center mb-8 md:mb-12 slide-up-delay-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent px-4 text-glow-blue">
-                Cinematic Projects
-              </h2>
-              <p className="text-gray-300 text-center mb-0 max-w-2xl mx-auto px-4 text-glow-gray">
-                Wide-format content including commercials, music videos, and documentaries
-              </p>
+          <ScrollAnimation animation="fade-up" delay={100}>
+            <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20">
+              <ScrollAnimation animation="fade-up" delay={200}>
+                <div className="text-center mb-8 md:mb-12">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent px-4 text-glow-blue">
+                    Cinematic Projects
+                  </h2>
+                  <p className="text-gray-300 text-center mb-0 max-w-2xl mx-auto px-4 text-glow-gray">
+                    Wide-format content including commercials, music videos, and documentaries
+                  </p>
+                </div>
+              </ScrollAnimation>
+              <ScrollAnimation animation="fade-up" delay={300}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                  {landscapeVideos.map((video, index) => (
+                    <ScrollAnimation key={index} animation="scale-in" delay={100 * index}>
+                      <VideoPlayer
+                        src={video.src}
+                        poster={video.poster}
+                        title={video.title}
+                        aspectRatio="16:9"
+                      />
+                    </ScrollAnimation>
+                  ))}
+                </div>
+              </ScrollAnimation>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 slide-up-delay-3">
-              {landscapeVideos.map((video, index) => (
-                <VideoPlayer
-                  key={index}
-                  src={video.src}
-                  poster={video.poster}
-                  title={video.title}
-                  aspectRatio="16:9"
-                />
-              ))}
-            </div>
-            </div>
-          </div>
+          </ScrollAnimation>
+        </div>
       </section>
 
       {/* 9:16 Portfolio Section */}
-      <section className="py-12 md:py-20 px-4 md:px-8 relative overflow-hidden bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] slide-up">
+      <section className="py-12 md:py-20 px-4 md:px-8 relative overflow-hidden bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e]">
         {/* Small Grid Background */}
-        <div className="absolute inset-0">
+        <ParallaxElement speed="slow" className="absolute inset-0">
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="mobileGrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -446,41 +469,52 @@ function App() {
             </defs>
             <rect width="100%" height="100%" fill="url(#mobileGrid)" filter="url(#mobileGlow)"/>
           </svg>
-        </div>
+        </ParallaxElement>
         
         {/* Deep Blue/Purple Blur Orbs */}
-        <div className="absolute top-1/3 right-[85%] w-64 h-64 bg-[#7c3aed]/25 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 left-[85%] w-64 h-64 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
+        <ParallaxElement speed="medium">
+          <div className="absolute top-1/3 right-[85%] w-64 h-64 bg-[#7c3aed]/25 rounded-full blur-3xl"></div>
+        </ParallaxElement>
+        <ParallaxElement speed="fast">
+          <div className="absolute bottom-1/3 left-[85%] w-64 h-64 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
+        </ParallaxElement>
         
         <div className="max-w-6xl mx-auto">
-          <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#7c3aed]/15 to-[#3730a3]/20 slide-up-delay-1">
-            <div className="text-center mb-8 md:mb-12 slide-up-delay-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent px-4 text-glow-purple">
-                Social Media Content
-              </h2>
-              <p className="text-gray-300 text-center mb-0 max-w-2xl mx-auto px-4 text-glow-gray">
-                Vertical content optimized for mobile platforms and social media
-              </p>
+          <ScrollAnimation animation="fade-up" delay={100}>
+            <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#7c3aed]/15 to-[#3730a3]/20">
+              <ScrollAnimation animation="fade-up" delay={200}>
+                <div className="text-center mb-8 md:mb-12">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent px-4 text-glow-purple">
+                    Social Media Content
+                  </h2>
+                  <p className="text-gray-300 text-center mb-0 max-w-2xl mx-auto px-4 text-glow-gray">
+                    Vertical content optimized for mobile platforms and social media
+                  </p>
+                </div>
+              </ScrollAnimation>
+              <ScrollAnimation animation="fade-up" delay={300}>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto">
+                  {portraitVideos.map((video, index) => (
+                    <ScrollAnimation key={index} animation="scale-in" delay={50 * index}>
+                      <VideoPlayer
+                        src={video.src}
+                        poster={video.poster}
+                        title={video.title}
+                        aspectRatio="9:16"
+                      />
+                    </ScrollAnimation>
+                  ))}
+                </div>
+              </ScrollAnimation>
             </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-6xl mx-auto slide-up-delay-3">
-              {portraitVideos.map((video, index) => (
-                <VideoPlayer
-                  key={index}
-                  src={video.src}
-                  poster={video.poster}
-                  title={video.title}
-                  aspectRatio="9:16"
-                />
-              ))}
-            </div>
-            </div>
-          </div>
+          </ScrollAnimation>
+        </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-12 md:py-20 px-4 md:px-8 bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] relative overflow-hidden slide-up">
+      <section id="contact" className="py-12 md:py-20 px-4 md:px-8 bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] relative overflow-hidden">
         {/* Small Grid Background */}
-        <div className="absolute inset-0">
+        <ParallaxElement speed="slow" className="absolute inset-0">
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <pattern id="contactGrid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -496,27 +530,39 @@ function App() {
             </defs>
             <rect width="100%" height="100%" fill="url(#contactGrid)" filter="url(#contactGlow)"/>
           </svg>
-        </div>
+        </ParallaxElement>
         
         {/* Deep Blue Blur Orbs */}
-        <div className="absolute top-1/4 left-[80%] w-72 h-72 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-[80%] w-80 h-80 bg-[#1e3a8a]/25 rounded-full blur-3xl"></div>
+        <ParallaxElement speed="medium">
+          <div className="absolute top-1/4 left-[80%] w-72 h-72 bg-[#1e40af]/30 rounded-full blur-3xl"></div>
+        </ParallaxElement>
+        <ParallaxElement speed="fast">
+          <div className="absolute bottom-1/4 right-[80%] w-80 h-80 bg-[#1e3a8a]/25 rounded-full blur-3xl"></div>
+        </ParallaxElement>
         
         <div className="max-w-4xl mx-auto text-center">
-          <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20 slide-up-delay-1">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-white px-4 text-glow-white slide-up-delay-2">Let's Create Something Amazing</h2>
-            <p className="text-lg sm:text-xl text-gray-300 mb-6 md:mb-8 px-4 text-glow-gray slide-up-delay-2">
-              Ready to bring your vision to life? Get in touch to discuss your next project.
-            </p>
-            <button className="btn-enhanced btn-cta-enhanced rounded-lg mx-4 text-glow slide-up-delay-3">
-              Start a Project
-            </button>
-          </div>
+          <ScrollAnimation animation="scale-in" delay={100}>
+            <div className="relative z-10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl bg-gradient-to-br from-[#1e3a8a]/20 via-[#1e40af]/15 to-[#3730a3]/20">
+              <ScrollAnimation animation="fade-up" delay={200}>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-white px-4 text-glow-white">Let's Create Something Amazing</h2>
+              </ScrollAnimation>
+              <ScrollAnimation animation="fade-up" delay={300}>
+                <p className="text-lg sm:text-xl text-gray-300 mb-6 md:mb-8 px-4 text-glow-gray">
+                  Ready to bring your vision to life? Get in touch to discuss your next project.
+                </p>
+              </ScrollAnimation>
+              <ScrollAnimation animation="scale-in" delay={400}>
+                <button className="btn-enhanced btn-cta-enhanced rounded-lg mx-4 text-glow">
+                  Start a Project
+                </button>
+              </ScrollAnimation>
+            </div>
+          </ScrollAnimation>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-6 md:py-8 px-4 md:px-8 bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] border-t border-gray-800/50 relative overflow-hidden slide-up">
+      <footer className="py-6 md:py-8 px-4 md:px-8 bg-gradient-to-br from-[#0a0a0f] via-[#0f1419] to-[#1a1a2e] border-t border-gray-800/50 relative overflow-hidden">
         {/* Small Grid Background */}
         <div className="absolute inset-0">
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -529,7 +575,9 @@ function App() {
           </svg>
         </div>
         <div className="max-w-6xl mx-auto text-center text-gray-400">
-          <p className="text-sm md:text-base text-glow-gray relative z-10 slide-up-delay-1">&copy; 2025 Aamir Naqvi Portfolio. All rights reserved.</p>
+          <ScrollAnimation animation="fade-up" delay={100}>
+            <p className="text-sm md:text-base text-glow-gray relative z-10">&copy; 2025 Aamir Naqvi Portfolio. All rights reserved.</p>
+          </ScrollAnimation>
         </div>
       </footer>
     </div>
